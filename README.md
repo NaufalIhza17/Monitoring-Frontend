@@ -189,3 +189,9 @@ Then run:
 ```bash
 docker-compose up -d --build
 ```
+
+---
+
+## Credits
+
+Built by **[Mochammad Naufal Ihza Syahzada]** with AI assistance from [Claude](https://claude.ai) and [ChatGPT](https://chatgpt.com).
