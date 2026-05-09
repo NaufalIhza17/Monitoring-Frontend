@@ -81,7 +81,7 @@ src/
 |---|---|---|---|
 | Dashboard | ✅ | ✅ | ✅ (no clock in) |
 | History | ✅ personal | ✅ personal + team | ❌ |
-| Team | ✅ (locked if off duty) | ✅ | ✅ |
+| Team | ✅ | ✅ | ✅ |
 | Approvals | ❌ | ✅ | ✅ |
 | Manage | ❌ | ✅ staff only | ✅ all users |
 
