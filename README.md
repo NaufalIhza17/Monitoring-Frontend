@@ -6,16 +6,16 @@ React + Vite application for the Staff Monitoring system. Provides role-based da
 
 ## Tech Stack
 
-| Purpose | Library |
-|---|---|
-| Framework | React 19 + Vite (TypeScript) |
-| Styling | Tailwind CSS v4 |
-| UI Components | shadcn/ui |
-| Routing | React Router v6 |
-| HTTP Client | Axios |
-| State Management | Zustand (persisted) |
-| Charts | Recharts (via shadcn) |
-| Forms | React Hook Form |
+| Purpose          | Library                      |
+| ---------------- | ---------------------------- |
+| Framework        | React 19 + Vite (TypeScript) |
+| Styling          | Tailwind CSS v4              |
+| UI Components    | shadcn/ui                    |
+| Routing          | React Router v6              |
+| HTTP Client      | Axios                        |
+| State Management | Zustand (persisted)          |
+| Charts           | Recharts (via shadcn)        |
+| Forms            | React Hook Form              |
 
 ---
 
@@ -77,13 +77,13 @@ src/
 
 ## Roles & Pages
 
-| Page | Staff | HRD | Admin |
-|---|---|---|---|
-| Dashboard | ✅ | ✅ | ✅ (no clock in) |
-| History | ✅ personal | ✅ personal + team | ❌ |
-| Team | ✅ | ✅ | ✅ |
-| Approvals | ❌ | ✅ | ✅ |
-| Manage | ❌ | ✅ staff only | ✅ all users |
+| Page      | Staff       | HRD                | Admin            |
+| --------- | ----------- | ------------------ | ---------------- |
+| Dashboard | ✅          | ✅                 | ✅ (no clock in) |
+| History   | ✅ personal | ✅ personal + team | ❌               |
+| Team      | ✅          | ✅                 | ✅               |
+| Approvals | ❌          | ✅                 | ✅               |
+| Manage    | ❌          | ✅ staff only      | ✅ all users     |
 
 ---
 
@@ -108,19 +108,84 @@ src/
 ## Demo
 
 ### Staff
+
 <!-- Add screenshot or screen recording here -->
 
 ### HRD
+
 <!-- Add screenshot or screen recording here -->
 
 ### Admin
+
 <!-- Add screenshot or screen recording here -->
 
 ---
 
-## Docker
+## Running with Docker
+
+If you want to run the full stack (frontend + backend + database) together, create a `docker-compose.yml` in your root folder with both repos cloned alongside each other:
+
+```
+root/
+├── monitoring-app-react/     ← this repo
+├── monitoring-app-nest/      ← backend repo
+└── docker-compose.yml        ← create this
+```
+
+```yaml
+services:
+  frontend:
+    build:
+      context: ./monitoring-app-react
+    container_name: monitoring_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./monitoring-app-react:/app
+      - /app/node_modules
+    command: npm run dev -- --host
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./monitoring-app-nest
+    container_name: monitoring_backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./monitoring-app-nest:/app
+      - ./monitoring-app-nest/uploads:/app/uploads
+      - /app/node_modules
+    command: npm run start:dev
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: yourpassword
+      DB_NAME: monitoring_app
+      JWT_SECRET: your_jwt_secret_here
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: monitoring_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: monitoring_app
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+```
+
+Then run:
 
 ```bash
-# Run with Docker Compose (from project root)
 docker-compose up -d --build
 ```
