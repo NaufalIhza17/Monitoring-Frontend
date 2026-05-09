@@ -109,11 +109,15 @@ src/
 
 ### Staff
 
-<!-- Add screenshot or screen recording here -->
+https://github.com/user-attachments/assets/73768139-0889-4d3d-9a41-20ba8d2bac08
+
+
 
 ### HRD
 
-<!-- Add screenshot or screen recording here -->
+https://github.com/user-attachments/assets/d38c5d64-eb99-4bbc-b20b-07c59109003c
+
+
 
 ### Admin
 
