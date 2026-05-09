@@ -124,10 +124,3 @@ src/
 # Run with Docker Compose (from project root)
 docker-compose up -d --build
 ```
-
-Frontend container uses polling-based hot reload for file changes inside Docker:
-```yaml
-environment:
-  CHOKIDAR_USEPOLLING: true
-  WATCHPACK_POLLING: true
-```
